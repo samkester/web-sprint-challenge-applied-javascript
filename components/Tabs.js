@@ -14,6 +14,8 @@ import axios from "axios";
 
 const tabContainer = document.querySelector("div.topics");
 
+let currentTopic = "none";
+
 axios.get("https://lambda-times-api.herokuapp.com/topics").then(response => {
     /*console.log(response);
     console.log(response.data);
@@ -24,6 +26,26 @@ axios.get("https://lambda-times-api.herokuapp.com/topics").then(response => {
         const div = document.createElement("div");
         div.textContent = item;
         div.classList.add("tab");
+        div.addEventListener("click", event => {
+            currentTopic = div.textContent;
+            adjustStylesForCurrentTopic();
+            console.log(currentTopic);
+        });
         tabContainer.append(div);
     });
 });
+
+function adjustStylesForCurrentTopic(){
+    document.querySelectorAll(".tab").forEach(tab => {
+        if(tab.textContent === currentTopic)
+        {
+            console.log(`activating ${tab.textContent}`);
+            tab.classList.add("active-tag");
+        }
+        else
+        {
+            console.log(`deactivating ${tab.textContent}`);
+            tab.classList.remove("active-tag");
+        }
+    });
+}
