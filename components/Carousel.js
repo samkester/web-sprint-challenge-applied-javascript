@@ -43,7 +43,7 @@ function carousel(...paths){ // allows any number of image paths to be passed to
     return image;
   });
 
-  carousel.prepend(leftButton);
+  carousel.append(leftButton);
   carousel.append(rightButton);
 
   let currentIndex = 0;
