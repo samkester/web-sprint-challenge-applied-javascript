@@ -36,6 +36,8 @@ axios.get("https://lambda-times-api.herokuapp.com/topics").then(response => {
 });
 
 function adjustStylesForCurrentTopic(){
+    if(currentTopic === "node.js") currentTopic = "node"; // small workaround
+
     document.querySelectorAll(".tab").forEach(tab => {
         if(tab.textContent === currentTopic)
         {
@@ -46,6 +48,17 @@ function adjustStylesForCurrentTopic(){
         {
             console.log(`deactivating ${tab.textContent}`);
             tab.classList.remove("active-tag");
+        }
+    });
+
+    document.querySelectorAll(".card").forEach(card => {
+        if(card.classList.contains(currentTopic))
+        {
+            card.style.display = "initial";
+        }
+        else
+        {
+            card.style.display = "none";
         }
     });
 }

@@ -25,10 +25,10 @@ import axios from "axios";
 
 const container = document.querySelector("div.cards-container");
 
-function cardFor(article){
+function cardFor(article, topic){
     const cardBase = document.createElement("div");
-    cardBase.classList.add("card");
-
+    cardBase.classList.add("card", topic);
+    
     const headline = document.createElement("div");
     headline.classList.add("headline");
     headline.textContent = article.headline;
@@ -64,6 +64,6 @@ axios.get("https://lambda-times-api.herokuapp.com/articles").then(response => {
 
     for(let topic in response.data.articles)
     {
-        response.data.articles[topic].forEach(article => container.append(cardFor(article)));
+        response.data.articles[topic].forEach(article => container.append(cardFor(article, topic)));
     }
 });
