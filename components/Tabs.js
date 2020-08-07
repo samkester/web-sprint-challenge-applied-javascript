@@ -24,37 +24,37 @@ axios.get("https://lambda-times-api.herokuapp.com/topics").then(response => {
 
     response.data.topics.forEach(item => {
         const div = document.createElement("div");
+        div.id = item;
+        if(div.id === "node.js") div.id = "node"; // small workaround so that IDs match the topics of each article
         div.textContent = item;
         div.classList.add("tab");
         div.addEventListener("click", event => {
-            if(currentTopic === div.textContent)
+            if(currentTopic === div.id)
             {
                 currentTopic = "none"; // reset if we click on the same button again
             }
             else
             {
-                currentTopic = div.textContent;
+                currentTopic = div.id;
             }
             adjustStylesForCurrentTopic();
-            console.log(currentTopic);
+            //console.log(currentTopic);
         });
         tabContainer.append(div);
     });
 });
 
 function adjustStylesForCurrentTopic(){
-    if(currentTopic === "node.js") currentTopic = "node"; // small workaround
-
     document.querySelectorAll(".tab").forEach(tab => {
-        if(tab.textContent === currentTopic)
+        if(tab.id === currentTopic)
         {
-            //console.log(`activating ${tab.textContent}`);
-            tab.classList.add("active-tag");
+            //console.log(`activating ${tab.id}`);
+            tab.classList.add("active-tab");
         }
         else
         {
-            //console.log(`deactivating ${tab.textContent}`);
-            tab.classList.remove("active-tag");
+            //console.log(`deactivating ${tab.id}`);
+            tab.classList.remove("active-tab");
         }
     });
 
