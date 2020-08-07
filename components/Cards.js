@@ -53,8 +53,13 @@ function cardFor(article){
 }
 
 axios.get("https://lambda-times-api.herokuapp.com/articles").then(response => {
-    console.log(response);
-    console.log(response.data.articles);
+    //console.log(response);
+    //console.log(response.data.articles);
 
-    container.append(cardFor(response.data.articles.javascript[0]));
+    //container.append(cardFor(response.data.articles.javascript[0]));
+
+    for(let topic in response.data.articles)
+    {
+        response.data.articles[topic].forEach(article => container.append(cardFor(article)));
+    }
 });
