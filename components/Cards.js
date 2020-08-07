@@ -49,6 +49,10 @@ function cardFor(article){
     author.append(imgContainer, byline);
     imgContainer.append(authorImg);
 
+    cardBase.addEventListener("click", event => {
+        console.log(`${event.currentTarget.querySelector("div.headline").textContent}`);
+    });
+
     return cardBase;
 }
 
