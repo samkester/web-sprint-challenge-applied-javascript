@@ -43,7 +43,8 @@ function carousel(...paths){ // allows any number of image paths to be passed to
     return image;
   });
 
-  console.log(images);
+  carousel.prepend(leftButton);
+  carousel.append(rightButton);
 
   let currentIndex = 0;
 
@@ -55,9 +56,18 @@ function carousel(...paths){ // allows any number of image paths to be passed to
   }
 
   hideAllButCurrentIndex();
+  
+  leftButton.addEventListener("click", event => {
+    currentIndex -= 1;
+    if(currentIndex < 0) currentIndex += images.length;
+    hideAllButCurrentIndex();
+  });
 
-  carousel.prepend(leftButton);
-  carousel.append(rightButton);
+  rightButton.addEventListener("click", event => {
+    currentIndex += 1;
+    if(currentIndex >= images.length) currentIndex -= images.length;
+    hideAllButCurrentIndex();
+  });
 
   return carousel;
 }
